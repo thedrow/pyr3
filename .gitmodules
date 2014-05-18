@@ -1,0 +1,3 @@
+[submodule "bin/r3"]
+	path = bin/r3
+	url = https://github.com/c9s/r3.git

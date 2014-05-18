@@ -152,7 +152,19 @@ lib = ffi.verify("""   // passed to the real C compiler
  
  
 class Tree(object):
-    def __init__(self):
-        self._tree = ffi.gc(lib.r3_tree_create(10), lib.r3_tree_free)
+    def __init__(self, capacity=10):
+        self._tree = ffi.gc(lib.r3_tree_create(capacity), lib.r3_tree_free)
+
+    def compile(self):
+        return lib.r3_tree_compile(self._tree)
+
+    def dump(self, level=0):
+        return lib.r3_tree_dump(self._tree, level)
+
+    def insert(self, path, callback):
+        lib.r3_tree_insert_pathl(self._tree, path, len(path), ffi.NULL, ffi.callback("void(void)", callback))
+
+    def match(self, path):
+        return lib.r3_tree_match(self._tree, path, len(path), ffi.NULL)
  
 tree = Tree()

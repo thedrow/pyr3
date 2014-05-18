@@ -153,6 +153,6 @@ lib = ffi.verify("""   // passed to the real C compiler
  
 class Tree(object):
     def __init__(self):
-        self._tree = ffi.gc(r3.r3_tree_create(10), r3.r3_tree_free)
+        self._tree = ffi.gc(lib.r3_tree_create(10), lib.r3_tree_free)
  
 tree = Tree()
